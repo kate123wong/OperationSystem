@@ -3,6 +3,7 @@ SystemOperation::SystemOperation() {
 	this->day = 0;
 	this->hour = 0;
 	this->min = 0;
+	this->timer = "00:00";
 }
 SystemOperation::~SystemOperation() {
 
@@ -58,3 +59,12 @@ void SystemOperation::timeAdd(int t) {
 	this->timer = tmp;
 }
 
+std::vector<JOB> SystemOperation::ComingJob(const std::string t) {
+	std::vector<JOB> res;
+	for (auto tmpjob : this->job) {
+		if (tmpjob.getSubmissionTime() == t && this->day == 0) {
+			res.push_back(tmpjob);
+		}
+	}
+	return res;
+}

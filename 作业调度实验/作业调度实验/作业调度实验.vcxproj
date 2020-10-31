@@ -139,17 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="FCFS.cpp" />
     <ClCompile Include="HRRN.cpp" />
     <ClCompile Include="JOB.cpp" />
+    <ClCompile Include="RR.cpp" />
     <ClCompile Include="SJF.cpp" />
     <ClCompile Include="SystemOperation.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Data.h" />
     <ClInclude Include="FCFS.h" />
     <ClInclude Include="HRRN.h" />
     <ClInclude Include="JOB.h" />
+    <ClInclude Include="RR.h" />
     <ClInclude Include="SJF.h" />
     <ClInclude Include="SystemOperation.h" />
   </ItemGroup>

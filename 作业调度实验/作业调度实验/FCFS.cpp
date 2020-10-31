@@ -38,6 +38,7 @@ void FCFS::schedule(std::vector<JOB> Job) {
 			//当前正在处理的作业的周转时间++，判断作业是否完成，完成的话，开始下一个作业或者设置无正在进行的作业
 			if (isRun) {
 				jobQueue[curJob].setCycleTime(jobQueue[curJob].getCycleTime() + 1);
+				jobQueue[curJob].setRunTime(jobQueue[curJob].getRunTime() + 1);
 				if (jobQueue[curJob].isFinish() && this->day == 0) {
 					jobQueue[curJob].setEndTime(this->timer);
 					if (curJob + 1 < jobQueue.size()) {
@@ -69,14 +70,6 @@ void FCFS::printSchedule() {
 		<< "要求服务运行时间" << "\t" << "开始时间" << "\t" << "完成时间" << "\t" << "等待时间" << "\t" << "周转时间" << std::endl;
 	for (auto j : this->jobQueue) {
 		j.printf();
+		std::cout << std::endl;
 	}
-}
-std::vector<JOB>  FCFS::ComingJob(const std::string t) {
-	std::vector<JOB> res;
-	for (auto tmpjob : this->job) {
-		if (tmpjob.getSubmissionTime() == t && this->day == 0) {
-			res.push_back(tmpjob);
-		}
-	}
-	return res;
 }

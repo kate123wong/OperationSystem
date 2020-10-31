@@ -1,17 +1,25 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <queue>
 #include "JOB.h"
-class HRRN
+#include "SystemOperation.h"
+class HRRN:public SystemOperation
 {
 public:
 	HRRN();
 	HRRN(std::vector<JOB>);
 	~HRRN();
 
-	void schedule(std::vector<JOB>);
+	virtual void schedule(std::vector<JOB>);
 	void printSchedule();
+	struct cmp {
+		bool operator()(const JOB& a, const JOB& b) {
+			return a.getResponseRatio() < b.getResponseRatio();
+		}
+	};
 private:
-	std::vector<JOB> job;
+	std::priority_queue<JOB, std::vector<JOB>, cmp> priority_job;
+	std::vector<JOB> resjob;
 };
 

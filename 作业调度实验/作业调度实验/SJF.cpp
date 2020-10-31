@@ -13,6 +13,7 @@ SJF::SJF(std::vector<JOB> Job) {
 }
 
 void SJF::schedule(std::vector<JOB> Job) {
+
 	if (this->job.size() == 0)
 	this->job = Job;
 
@@ -30,32 +31,33 @@ void SJF::schedule(std::vector<JOB> Job) {
 				priority_job_tmp.push(tmpjob);
 			}
 			priority_job = priority_job_tmp;
+		}
+		//当前正在处理的作业的周转时间++，判断作业是否完成，完成的话，开始下一个作业或者设置无正在进行的作业
+		if (isRun) {
+			resjob[resjob.size()-1].setCycleTime(resjob[resjob.size() - 1].getCycleTime() + 1);
+			resjob[resjob.size() - 1].setRunTime(resjob[resjob.size() - 1].getRunTime() + 1);
 
-			//当前正在处理的作业的周转时间++，判断作业是否完成，完成的话，开始下一个作业或者设置无正在进行的作业
-			if (isRun) {
-				resjob[resjob.size()-1].setCycleTime(resjob[resjob.size() - 1].getCycleTime() + 1);
-
-				if (resjob[resjob.size() - 1].isFinish() && this->day == 0) {
-					resjob[resjob.size() - 1].setEndTime(this->timer);
-					if (!priority_job.empty()) {
-						JOB tmpjob = priority_job.top();
-						priority_job.pop();
-						tmpjob.setStartTime(this->timer);
-						resjob.push_back(tmpjob);
-					}
-					else if (priority_job.empty()) isRun = false; //当前最后一个作业也处理完毕，无作业可以处理
+			if (resjob[resjob.size() - 1].isFinish() && this->day == 0) {
+				resjob[resjob.size() - 1].setEndTime(this->timer);
+				if (!priority_job.empty()) {
+					JOB tmpjob = priority_job.top();
+					priority_job.pop();
+					tmpjob.setStartTime(this->timer);
+					resjob.push_back(tmpjob);
 				}
+				else if (priority_job.empty()) isRun = false; //当前最后一个作业也处理完毕，无作业可以处理
 			}
 		}
-
+		
 		std::vector<JOB> startjob;
 		startjob = this->ComingJob(this->timer);// 将此时提交的作业加入到后备队列中
 		for (auto tmpjob : startjob) {
 			if (!isRun) {                      // 如果之前没有运行作业，那么现在开始运行刚刚加入的作业
 				isRun = true;
 				tmpjob.setStartTime(this->timer);
+				resjob.push_back(tmpjob);
 			}
-			resjob.push_back(tmpjob);
+			else priority_job.push(tmpjob);
 		}
 
 		this->timeAdd(1);						// 时间++
@@ -72,15 +74,7 @@ void SJF::printSchedule() {
 		<< "要求服务运行时间" << "\t" << "开始时间" << "\t" << "完成时间" << "\t" << "等待时间" << "\t" << "周转时间" << std::endl;
 	for (auto j : this->resjob) {
 		j.printf();
+		std::cout << std::endl;
 	}
 }
 
-std::vector<JOB>  SJF::ComingJob(const std::string t) {
-	std::vector<JOB> res;
-	for (auto tmpjob : this->job) {
-		if (tmpjob.getSubmissionTime() == t && this->day == 0) {
-			res.push_back(tmpjob);
-		}
-	}
-	return res;
-}

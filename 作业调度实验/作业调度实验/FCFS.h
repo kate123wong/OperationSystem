@@ -11,7 +11,6 @@ public:
 	FCFS(std::vector<JOB>);
 	~FCFS();
 	virtual void schedule(std::vector<JOB>);
-	virtual std::vector<JOB> ComingJob(const std::string);
 	void printSchedule();
 private:
 	std::vector<JOB> jobQueue;
