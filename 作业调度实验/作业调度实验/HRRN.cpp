@@ -80,9 +80,14 @@ void HRRN::schedule(std::vector<JOB> Job) {
 void HRRN::printSchedule() {
 
 	std::cout << "作业编号" << "\t" << "作业名称" << "\t" << "提交时间" << "\t"
-		<< "要求服务运行时间" << "\t" << "开始时间" << "\t" << "完成时间" << "\t" << "等待时间" << "\t" << "周转时间" << std::endl;
+		<< "要求服务运行时间" << "\t" << "开始时间" << "\t" << "完成时间" << "\t" << "等待时间" << "\t" << "周转时间" << "\t" << "带权周转时间" << std::endl;
+	double averweightcycletime = 0, avercycletime = 0;
 	for (auto j : this->resjob) {
 		j.printf();
 		std::cout << std::endl;
+		averweightcycletime +=  j.getCycleTime() / j.getNeedServerTime();
+		avercycletime += j.getCycleTime();
 	}
+	std::cout << "平均带权周转时间： " << averweightcycletime / resjob.size() << std::endl;
+	std::cout << "平均周转时间： " << avercycletime / resjob.size() << std::endl;
 }

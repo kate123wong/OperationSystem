@@ -4,6 +4,7 @@
 	 this->cycleTime = 0;
 	 this->responseRatio = 1;
 	 this->runTime = 0;
+	 this->startTime = "00:00";
 }
 
  JOB::~JOB() {
@@ -20,7 +21,8 @@ void JOB::printf() {
 		<< "\t\t" << this->startTime
 		<< "\t\t" << this->endTime 
 		<< "\t\t" << this->wateTime 
-		<< "\t\t" << this->cycleTime << std::endl;
+		<< "\t\t" << this->cycleTime 
+		<< "\t\t" << 1.0 * (this->getCycleTime()/this->getNeedServerTime())   << std::endl;
 }
 
 void JOB::setId(const int id) {

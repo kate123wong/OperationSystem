@@ -1,0 +1,10 @@
+﻿  FCFS.cpp
+C:\Users\18810\Desktop\OperationSystem\作业调度实验\作业调度实验\FCFS.cpp(33,31): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\18810\Desktop\OperationSystem\作业调度实验\作业调度实验\FCFS.cpp(44,21): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\18810\Desktop\OperationSystem\作业调度实验\作业调度实验\FCFS.cpp(20,28): warning C4390: “;”: 找到空的受控语句；这是否是有意的?
+  HRRN.cpp
+  RR.cpp
+  SJF.cpp
+  正在生成代码...
+  LINK : 没有找到 C:\Users\18810\Desktop\OperationSystem\作业调度实验\Debug\作业调度实验.exe 或上一个增量链接没有生成它；正在执行完全链接
+  作业调度实验.vcxproj -> C:\Users\18810\Desktop\OperationSystem\作业调度实验\Debug\作业调度实验.exe
